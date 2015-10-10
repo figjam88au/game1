@@ -2,8 +2,7 @@
 use Modern::Perl '2015';
 use autodie;
 
-#Version 0.0.4 20150710
-use Scalar::Util qw(looks_like_number); #determins if variable is a number			
+#Version 0.0.4 20150710		
 use Win32::Console;						#allows cls to clear screen
 
 
