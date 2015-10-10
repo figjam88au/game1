@@ -2,7 +2,6 @@
 use Modern::Perl '2015';
 use autodie;
 
-#Version 0.0.4 20150710		
 use Win32::Console;						#allows cls to clear screen
 
 
@@ -19,7 +18,6 @@ our $randenemy;
 
 my $OUT = Win32::Console->new(STD_OUTPUT_HANDLE);
 my $clear_string = $OUT->Cls;
-
 
 
 
