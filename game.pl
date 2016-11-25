@@ -1,9 +1,7 @@
 #!/usr/bin/env perl
-use Modern::Perl '2015';
+use strict;
+use warnings;
 use autodie;
-
-use Win32::Console;						#allows cls to clear screen
-
 
 our $playername;
 our $playerhp; #current health
@@ -11,13 +9,9 @@ our $playerlevel;
 our $enemyhp; #current enemy health
 our $enemy;	#enemy number
 our $enemyname; #enemy name
-our $move = "s";		#attack option x
+our $move = "s";		#x, c and q are used
 our $validmove = "no";
 our $randenemy;
-
-
-my $OUT = Win32::Console->new(STD_OUTPUT_HANDLE);
-my $clear_string = $OUT->Cls;
 
 
 
@@ -31,10 +25,8 @@ while ($move ne "q" and $enemyhp >= 1) {
 victory ();
 
 
-
 #subs
 sub intro {
-	print $clear_string, "\n";
 	print "This is my Game\n", "set in 2060\n", "\n";
 }
 
@@ -82,5 +74,5 @@ sub victory {
 	} elsif ($move ne "q"){			#victory if quit by winning
 		print "Victory\n";
 	}
-	
 }
+
