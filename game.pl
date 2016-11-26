@@ -3,12 +3,17 @@ use strict;
 use warnings;
 use autodie;
 
+# Program by Brett Wilson 
+# Version 0.0.5.201611
+
 our $playername;
 our $playerhp; #current health
 our $playerlevel;
 our $enemyhp; #current enemy health
 our $enemy;	#enemy number
 our $enemyname; #enemy name
+our $enemyattack; #attack name
+our $enemydamage; #damage from attack
 our $move = "s";		#x, c and q are used
 our $validmove = "no";
 our $randenemy;
@@ -53,17 +58,27 @@ sub setenemy {
 	);
 	$enemyname = $AoA[$randenemy][0];
 	$enemyhp = $AoA[$randenemy][1];
+	$enemyattack = $AoA[$randenemy][2];
+	$enemydamage = $AoA[$randenemy][3];
 	print "An evil $enemyname approaches\n", "It has $enemyhp hp\n", "\n";
 }
 
 
 sub battle {
+#your turn
+	print "Your health is $playerhp\n";
 	print "Push x to punch\n", "Puch c to kick\n", "Push q to exit\n";
 	$move = <>;
 	chomp $move;
 	if ($move eq 'x') {$enemyhp = $enemyhp - 1};
 	if ($move eq 'c') {$enemyhp = $enemyhp - 2};
 	print "enemy hp is $enemyhp \n", "\n";
+#enemy turn
+	if ($enemyhp > 0){
+		print "$enemyname uses $enemyattack\n";
+		$playerhp = $playerhp - $enemydamage;
+		print "$enemyattack does $enemydamage damage to $playername\n";
+	}
 }
 
 
