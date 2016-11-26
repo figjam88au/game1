@@ -15,7 +15,7 @@ our $enemyname; #enemy name
 our $enemyattack; #attack name
 our $enemydamage; #damage from attack
 our $move = "s";		#x, c and q are used
-our $validmove = "That is not a Valid move\n";
+our $validmove;		#valid message
 our $randenemy;		#number of enemy in array
 
 
@@ -68,17 +68,27 @@ sub battle {
 #your turn
 	print "Your health is $playerhp\n";
 	print "Push x to punch\n", "Puch c to kick\n", "Push q to exit\n";
+	$validmove = "That is not a vailid move: Loose a turn\n";
 	$move = <>;
 	chomp $move;
-	if ($move eq 'x') {$enemyhp = $enemyhp - 1; $validmove = "\n"};
-	if ($move eq 'c') {$enemyhp = $enemyhp - 2; $validmove = "\n"};
+	if ($move eq 'x') {
+		$enemyhp = $enemyhp - 1; 
+		$validmove = "\n";
+		print "$playername uses Punch and does 1 damage\n";
+	}
+	if ($move eq 'c') {
+		$enemyhp = $enemyhp - 2; 
+		$validmove = "\n";
+		print "$playername uses Kick and does 2 damage\n";
+	}
 	print $validmove;			#print valid message
+
 #enemy turn
+	print "Enemy hp is $enemyhp\n";
 	if ($enemyhp > 0 and $move ne 'q'){
-		print "enemy hp is $enemyhp\n", "\n";
-		print "$enemyname uses $enemyattack\n";
+		print "The $enemyname uses $enemyattack\n";
 		$playerhp = $playerhp - $enemydamage;
-		print "$enemyattack does $enemydamage damage to $playername\n";
+		print "$enemyattack does $enemydamage damage to $playername\n", "\n";
 	}
 }
 
