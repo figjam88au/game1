@@ -50,12 +50,18 @@ sub setplayer {
 
 
 sub setenemy {
+	my @AoA;
 	$randenemy = int(rand(3)); #random Whole number between 0-3
-	my @AoA = (
-		[ "Cat", 3, "Claw", 2 ], #Name, HP, Attack, Damage
-		[ "Dog", 5, "Bite", 2 ],
-		[ "Rat", 2, "Squeek", 1 ],
-	);
+	my $filename = 'enemies.txt'; 				#set file location into variable
+	open(my $fh, '<:encoding(UTF-8)', $filename) #read file
+		or die "Could not open file '$filename' $!";
+ 
+while (my $row = <$fh>) {			#read each line
+	chomp $row;								#chomp each line
+	my @array = split(/\s/, $row);		#split each line into array
+	push @AoA, [@array];					#join arrays
+}
+
 	$enemyname = $AoA[$randenemy][0];
 	$enemyhp = $AoA[$randenemy][1];
 	$enemyattack = $AoA[$randenemy][2];
