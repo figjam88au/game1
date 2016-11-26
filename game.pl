@@ -15,8 +15,8 @@ our $enemyname; #enemy name
 our $enemyattack; #attack name
 our $enemydamage; #damage from attack
 our $move = "s";		#x, c and q are used
-our $validmove = "no";
-our $randenemy;
+our $validmove = "That is not a Valid move\n";
+our $randenemy;		#number of enemy in array
 
 
 
@@ -54,7 +54,7 @@ sub setenemy {
 	my @AoA = (
 		[ "Cat", 3, "Claw", 2 ], #Name, HP, Attack, Damage
 		[ "Dog", 5, "Bite", 2 ],
-		[ "Rat", 2, "bart", 1 ],
+		[ "Rat", 2, "Squeek", 1 ],
 	);
 	$enemyname = $AoA[$randenemy][0];
 	$enemyhp = $AoA[$randenemy][1];
@@ -70,11 +70,12 @@ sub battle {
 	print "Push x to punch\n", "Puch c to kick\n", "Push q to exit\n";
 	$move = <>;
 	chomp $move;
-	if ($move eq 'x') {$enemyhp = $enemyhp - 1};
-	if ($move eq 'c') {$enemyhp = $enemyhp - 2};
-	print "enemy hp is $enemyhp \n", "\n";
+	if ($move eq 'x') {$enemyhp = $enemyhp - 1; $validmove = "\n"};
+	if ($move eq 'c') {$enemyhp = $enemyhp - 2; $validmove = "\n"};
+	print $validmove;			#print valid message
 #enemy turn
-	if ($enemyhp > 0){
+	if ($enemyhp > 0 and $move ne 'q'){
+		print "enemy hp is $enemyhp\n", "\n";
 		print "$enemyname uses $enemyattack\n";
 		$playerhp = $playerhp - $enemydamage;
 		print "$enemyattack does $enemydamage damage to $playername\n";
@@ -83,11 +84,11 @@ sub battle {
 
 
 sub victory {
-	if ($move ne "q" and $enemyname eq "Cat"){			#victory if quit by winning
-		print "Victory\n";
+	if ($move ne "q" and $enemyname eq "Cat" and $enemyhp lt 1){			
+		print "Victory\n";			#victory if quit by winning
 		print "you have killed an animal in cold blood, you will now be arrested\n";
-	} elsif ($move ne "q"){			#victory if quit by winning
-		print "Victory\n";
+	} elsif ($move ne "q" and $enemyhp < 1){			
+		print "Victory\n";			#victory if quit by winning
 	}
 }
 
