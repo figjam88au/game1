@@ -17,7 +17,7 @@ our $enemydamage; #damage from attack
 our $move = "s";		#x, c and q are used
 our $validmove;		#valid message
 our $randenemy;		#number of enemy in array
-
+our $playerexp = 'exp.txt'; 	#load experience
 
 
 #code Starts here
@@ -39,8 +39,8 @@ sub intro {
 sub setplayer {
 	print "What is your name?\n";
 	$playername = <>;		# lets user set what playername is.
-	print "\n", "Player 1 is ", "$playername";
 	chomp $playername;
+	print "\n", "Player 1 is ", "$playername";
 	
 	$playerlevel = 1;		# sets default player level to 1
 	$playerhp = 5;
