@@ -39,7 +39,7 @@ sub setplayer {
 	print "What is your name?\n";
 	$playername = <>;		# lets user set what playername is.
 	chomp $playername;
-	print "\n", "Player 1 is ", "$playername";
+	print "\n", "Player 1 is ", "$playername\n";
 	
 	$playerlevel = 1;		# sets default player level to 1
 	$playerhp = 5;
@@ -86,11 +86,16 @@ sub battle {
 		$validmove = "\n";
 		print "$playername uses Kick and does 2 damage\n";
 	}
+	if ($move eq 'q') {
+		$validmove = "\n";
+		print "$playername is a quitter \n";
+	} 
 	print $validmove;			#print valid message
 
+
 #enemy turn
-	print "Enemy hp is $enemyhp\n";
 	if ($enemyhp > 0 and $move ne 'q'){
+		print "Enemy hp is $enemyhp\n";
 		print "The $enemyname uses $enemyattack\n";
 		$playerhp = $playerhp - $enemydamage;
 		print "$enemyattack does $enemydamage damage to $playername\n", "\n";
@@ -99,11 +104,12 @@ sub battle {
 
 
 sub victory {
-	if ($move ne "q" and $enemyname eq "Cat" and $enemyhp lt 1){			
-		print "Victory\n";			#victory if quit by winning
-		print "you have killed an animal in cold blood, you will now be arrested\n";
+	if ($move eq "q"){
+		print "Exiting Game...\n";
+	} elsif ($enemyname eq "Cat" and $enemyhp lt 1){			
+		print "you have killed an animal in cold blood, you will now be arrested\n";	#cat mod
 	} elsif ($move ne "q" and $enemyhp < 1){			
-		print "Victory\n";			#victory if quit by winning
+		print "Victory!! Dead $enemyname for dinner.\n";			#victory if quit by winning
 	}
 }
 
