@@ -16,7 +16,6 @@ our $enemyattack; #attack name
 our $enemydamage; #damage from attack
 our $move = "s";		#x, c and q are used
 our $validmove;		#valid message
-our $randenemy;		#number of enemy in array
 our $playerexp = 'exp.txt'; 	#load experience
 
 
@@ -51,16 +50,16 @@ sub setplayer {
 
 sub setenemy {
 	my @AoA;
-	$randenemy = int(rand(3)); #random Whole number between 0-3
+	my $randenemy = int(rand(3)); #random Whole number between 0-3
 	my $filename = 'enemies.txt'; 				#set file location into variable
-	open(my $fh, '<:encoding(UTF-8)', $filename) #read file
+	open(my $enemyblob, '<:encoding(UTF-8)', $filename) #read file
 		or die "Could not open file '$filename' $!";
  
-while (my $row = <$fh>) {			#read each line
-	chomp $row;								#chomp each line
-	my @array = split(/\s/, $row);		#split each line into array
-	push @AoA, [@array];					#join arrays
-}
+	while (my $row = <$enemyblob>) {			#read each line
+		chomp $row;								#chomp each line
+		my @array = split(/\s/, $row);		#split each line into array
+		push @AoA, [@array];					#join arrays
+	}
 
 	$enemyname = $AoA[$randenemy][0];
 	$enemyhp = $AoA[$randenemy][1];
